@@ -1,0 +1,95 @@
+{
+    "venv_patterns": [
+        "venv",
+        "env",
+        ".venv",
+        ".env",
+        "virtualenv",
+        ".virtualenv",
+        "python_env",
+        ".python_env"
+    ],
+    "python_versions": [
+        "python3",
+        "python",
+        "python3.12",
+        "python3.11",
+        "python3.10",
+        "python3.9",
+        "python3.8",
+        "py"
+    ],
+    "project_indicators": [
+        ".git",
+        "pyproject.toml",
+        "setup.py",
+        "setup.cfg",
+        "requirements.txt",
+        "requirements-dev.txt",
+        "Pipfile",
+        "Pipfile.lock",
+        "poetry.lock",
+        "package.json",
+        "package-lock.json",
+        "yarn.lock",
+        "Cargo.toml",
+        "go.mod",
+        "composer.json",
+        "Gemfile",
+        "Rakefile",
+        "Makefile",
+        "CMakeLists.txt",
+        "README.md",
+        "README.rst",
+        "LICENSE",
+        ".gitignore"
+    ],
+    "auto_create": true,
+    "auto_activate": true,
+    "shell_integration": true,
+    "verbose": false,
+    "quiet": false,
+    "force": false,
+    "python_path": null,
+    "venv_name": "venv",
+    "pip_upgrade": true,
+    "install_requirements": true,
+    "requirements_files": [
+        "requirements.txt",
+        "requirements-dev.txt",
+        "dev-requirements.txt"
+    ],
+    "exclude_patterns": [
+        "node_modules",
+        ".git",
+        "__pycache__",
+        "*.pyc",
+        ".pytest_cache",
+        ".coverage",
+        "dist",
+        "build",
+        "*.egg-info"
+    ],
+    "shell_commands": {
+        "bash": "source",
+        "zsh": "source",
+        "fish": "source",
+        "powershell": "&"
+    },
+    "hooks": {
+        "pre_activate": null,
+        "post_activate": null,
+        "pre_create": null,
+        "post_create": null
+    },
+    "logging": {
+        "enabled": false,
+        "level": "INFO",
+        "file": "~/.autoviron.log"
+    },
+    "cache": {
+        "enabled": true,
+        "ttl": 3600,
+        "file": "~/.autoviron_cache.json"
+    }
+} 

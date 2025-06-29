@@ -1,0 +1,58 @@
+{
+    "venv_patterns": [
+        "venv",
+        "env",
+        ".venv",
+        ".env",
+        "virtualenv",
+        ".virtualenv"
+    ],
+    "python_versions": [
+        "python3",
+        "python",
+        "python3.12",
+        "python3.11",
+        "python3.10",
+        "python3.9",
+        "python3.8",
+        "py"
+    ],
+    "project_indicators": [
+        ".git",
+        "pyproject.toml",
+        "setup.py",
+        "requirements.txt",
+        "Pipfile",
+        "poetry.lock"
+    ],
+    "auto_create": true,
+    "auto_activate": true,
+    "shell_integration": true,
+    "verbose": false,
+    "quiet": false,
+    "force": false,
+    "venv_name": "venv",
+    "pip_upgrade": true,
+    "install_requirements": true,
+    "requirements_files": [
+        "requirements.txt",
+        "requirements-dev.txt",
+        "dev-requirements.txt"
+    ],
+    "hooks": {
+        "pre_activate": "echo 'Pre-activation hook: Setting up environment...'",
+        "post_activate": "echo 'Post-activation hook: Environment ready!'",
+        "pre_create": "echo 'Pre-create hook: Preparing to create environment...'",
+        "post_create": "echo 'Post-create hook: Environment created successfully!'"
+    },
+    "logging": {
+        "enabled": false,
+        "level": "INFO",
+        "file": "~/.autoviron.log"
+    },
+    "cache": {
+        "enabled": true,
+        "ttl": 3600,
+        "file": "~/.autoviron_cache.json"
+    }
+} 

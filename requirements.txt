@@ -1,0 +1,13 @@
+# AutoViron - Universal Python Environment Launcher
+# Core dependencies (minimal for production use)
+
+# No external dependencies required - uses only Python standard library
+# This file is included for compatibility with package managers
+
+# Optional development dependencies (install with pip install -e ".[dev]")
+# pytest>=6.0
+# pytest-cov>=2.0
+# black>=21.0
+# flake8>=3.8
+# mypy>=0.800
+# pre-commit>=2.0 
