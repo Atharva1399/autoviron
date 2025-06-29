@@ -1,0 +1,124 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autoviron"
+version = "1.0.0"
+description = "Universal Python Environment Launcher"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "AutoViron Contributors", email = "autoviron@protonmail.com"}
+]
+maintainers = [
+    {name = "Atharva1399", email = "atharva1399@gmail.com"}
+]
+keywords = ["python", "virtual", "environment", "venv", "automation", "development", "tools"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Utilities",
+]
+requires-python = ">=3.8"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov>=2.0",
+    "black>=21.0",
+    "flake8>=3.8",
+    "mypy>=0.800",
+    "pre-commit>=2.0",
+]
+test = [
+    "pytest>=6.0",
+    "pytest-cov>=2.0",
+    "pytest-mock>=3.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Atharva1399/autoviron"
+Documentation = "https://github.com/Atharva1399/autoviron#readme"
+Repository = "https://github.com/Atharva1399/autoviron"
+"Bug Tracker" = "https://github.com/Atharva1399/autoviron/issues"
+"Discussions" = "https://github.com/Atharva1399/autoviron/discussions"
+
+[project.scripts]
+autoviron = "autoviron:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["autoviron*"]
+
+[tool.setuptools.package-data]
+autoviron = [
+    "config/*.json",
+    "shell/*.sh",
+    "shell/*.fish",
+    "shell/*.ps1",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=autoviron",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+]
+
+[tool.coverage.run]
+source = ["autoviron"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "setup.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+] 

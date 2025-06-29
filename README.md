@@ -224,19 +224,29 @@ Examples:
 
 ```
 autoviron/
-├── autoviron.py              # Main AutoViron script
-├── shell/                    # Shell integration scripts
-│   ├── bash.sh              # Bash integration
-│   ├── zsh.sh               # Zsh integration
-│   ├── fish.fish            # Fish integration
-│   └── powershell.ps1       # PowerShell integration
-├── config/                   # Configuration files
-│   └── default_config.json  # Default configuration
-├── setup.py                 # Package setup
-├── requirements.txt         # Dependencies
-├── test_autoviron.py       # Test suite
-├── .autovironrc.example    # Example configuration
-└── README.md               # This file
+├── autoviron/                 # Main package directory
+│   ├── __init__.py           # Main AutoViron module
+│   ├── shell/                # Shell integration scripts
+│   │   ├── bash.sh          # Bash integration
+│   │   ├── zsh.sh           # Zsh integration
+│   │   ├── fish.fish        # Fish integration
+│   │   └── powershell.ps1   # PowerShell integration
+│   └── config/               # Configuration files
+│       └── default_config.json  # Default configuration
+├── tests/                     # Test suite
+│   ├── __init__.py          # Tests package
+│   └── test_autoviron.py    # Main test suite
+├── pyproject.toml            # Modern Python packaging config
+├── setup.py                  # Backward compatibility setup
+├── MANIFEST.in               # Package distribution includes
+├── build.py                  # Build script
+├── requirements.txt          # Dependencies
+├── .autovironrc.example     # Example configuration
+├── LICENSE                   # MIT License
+├── README.md                # This file
+├── CONTRIBUTING.md          # Contribution guidelines
+├── CODE_OF_CONDUCT.md       # Community standards
+└── .gitignore               # Git ignores
 ```
 
 ## 📋 Examples
