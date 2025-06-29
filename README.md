@@ -34,7 +34,7 @@
 ### From Source
 
 ```bash
-git clone https://github.com/autoviron/autoviron.git
+git clone https://github.com/Atharva1399/autoviron.git
 cd autoviron
 pip install -e .
 ```
@@ -363,7 +363,7 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 ### Development Setup
 
 ```bash
-git clone https://github.com/autoviron/autoviron.git
+git clone https://github.com/Atharva1399/autoviron.git
 cd autoviron
 pip install -e ".[dev]"
 pre-commit install
@@ -390,10 +390,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- 📖 [Documentation](https://github.com/autoviron/autoviron#readme)
-- 🐛 [Bug Reports](https://github.com/autoviron/autoviron/issues)
-- 💡 [Feature Requests](https://github.com/autoviron/autoviron/issues)
-- 💬 [Discussions](https://github.com/autoviron/autoviron/discussions)
+- 📖 [Documentation](https://github.com/Atharva1399/autoviron#readme)
+- 🐛 [Bug Reports](https://github.com/Atharva1399/autoviron/issues)
+- 💡 [Feature Requests](https://github.com/Atharva1399/autoviron/issues)
+- 💬 [Discussions](https://github.com/Atharva1399/autoviron/discussions)
 
 ---
 
