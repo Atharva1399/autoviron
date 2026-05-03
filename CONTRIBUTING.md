@@ -1,38 +1,50 @@
 # Contributing to AutoViron
 
-Thank you for your interest in contributing! 🚀
+First off, thank you for considering contributing to AutoViron! It's people like you that make AutoViron such a great tool.
 
-## How to Contribute
+## Where do I go from here?
 
-1. **Fork the repository** and clone your fork.
-2. **Create a new branch** for your feature or bugfix:
+If you've noticed a bug or have a feature request, make sure to check our [Issues](https://github.com/Atharva1399/autoviron/issues) first to see if someone else has already created a ticket. If not, go ahead and [make one](https://github.com/Atharva1399/autoviron/issues/new)!
+
+## Fork & create a branch
+
+If this is something you think you can fix, then fork AutoViron and create a branch with a descriptive name.
+
+## Get the test suite running
+
+1. Ensure you have Python 3.9+ installed.
+2. Clone your fork and install the requirements:
    ```bash
-   git checkout -b my-feature
+   pip install -e ".[dev]"
    ```
-3. **Make your changes** and add tests if applicable.
-4. **Run the test suite** to ensure nothing is broken:
+3. Run the tests using `pytest`:
    ```bash
-   python test_autoviron.py
+   pytest tests/
    ```
-5. **Commit your changes** and push your branch:
-   ```bash
-   git add .
-   git commit -m "Describe your change"
-   git push origin my-feature
-   ```
-6. **Open a Pull Request** on GitHub and describe your changes.
+
+## Implement your fix or feature
+
+At this point, you're ready to make your changes. Feel free to ask for help; everyone is a beginner at first 😸
+
+## Make a Pull Request
+
+At this point, you should switch back to your master branch and make sure it's up to date with AutoViron's master branch:
+
+```bash
+git remote add upstream git@github.com:Atharva1399/autoviron.git
+git checkout master
+git pull upstream master
+```
+
+Then update your feature branch from your local copy of master, and push it!
+
+```bash
+git checkout 325-add-new-plugin
+git rebase master
+git push --set-upstream origin 325-add-new-plugin
+```
+
+Finally, go to GitHub and make a Pull Request.
 
 ## Code Style
-- Follow [PEP8](https://www.python.org/dev/peps/pep-0008/) for Python code.
-- Use 4 spaces for indentation.
-- Use clear, descriptive commit messages.
-
-## Reporting Issues
-- Use [GitHub Issues](../../issues) to report bugs or request features.
-- Please provide as much detail as possible.
-
-## Community
-- Be respectful and inclusive.
-- See our [Code of Conduct](CODE_OF_CONDUCT.md).
-
-Happy coding! 🎉 
+We use `black` for formatting and `flake8` for linting. Please ensure your code passes both before submitting a PR.

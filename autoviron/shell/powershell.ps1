@@ -124,7 +124,8 @@ Set-Alias -Name autoviron-activate -Value Invoke-AutoVironActivate
 Set-Alias -Name autoviron-create -Value Invoke-AutoVironCreate
 Set-Alias -Name autoviron-deactivate -Value Invoke-AutoVironDeactivate
 Set-Alias -Name autoviron-status -Value Get-AutoVironStatus
-Set-Alias -Name cd -Value Set-AutoVironLocation
+Set-Alias -Name avcd -Value Set-AutoVironLocation
+
 
 # Auto-activate virtual environment in current directory on shell startup
 Invoke-AutoVironActivate | Out-Null

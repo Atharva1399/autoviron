@@ -8,7 +8,6 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-env/
 build/
 develop-eggs/
 dist/
@@ -20,54 +19,41 @@ lib64/
 parts/
 sdist/
 var/
+wheels/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
-# Virtual environments
-.venv/
-venv/
+# AutoViron internal caching & memory
+.autoviron_cache
+.autoviron_failures.json
+
+# Environments
+.env
+.venv
 env/
+venv/
 ENV/
+env.bak/
+venv.bak/
 
-# PyInstaller
-*.manifest
-*.spec
-
-# Installer logs
-debug.log
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
+# Testing
+.pytest_cache/
 htmlcov/
 .tox/
 .nox/
 .coverage
 .coverage.*
-.cache
-nosetests.xml
 coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
 
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# pyenv
-.python-version
-
-# mypy
-.mypy_cache/
-.dmypy.json
-
-# VS Code
+# IDEs
 .vscode/
+.idea/
+*.swp
+*.swo
 
-# Mac
+# OS files
 .DS_Store
-
-# Windows
 Thumbs.db
-Desktop.ini 

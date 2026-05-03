@@ -1,410 +1,121 @@
-# AutoViron
+<div align="center">
+  <img src="https://img.shields.io/badge/AutoViron-2.0-blueviolet" alt="AutoViron Badge">
+  <h1>🚀 AutoViron</h1>
+  <p><b>Run any Python script. It fixes itself.</b></p>
+</div>
 
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PyPI version](https://badge.fury.io/py/autoviron.svg)](https://badge.fury.io/py/autoviron)
+---
 
-**AutoViron** is a next-generation universal Python environment launcher that automatically detects and activates the correct virtual environment for any project directory. It goes beyond traditional virtual environment managers by supporting multiple environment types and providing seamless cross-platform integration.
+Python environments are notoriously painful. You clone a repo, run `python main.py`, and immediately face a wall of `ModuleNotFoundError`s. You set up a `.venv`, run `pip install`, and then your script crashes again because you forgot a `.env` variable. 
 
-## 🚀 Features
+**AutoViron** is a self-healing, intelligent developer assistant that ends this cycle. 
 
-- 🔍 **Universal Environment Detection**: Automatically finds virtual environments, Poetry, Pipenv, Conda, and custom environments
-- 🚀 **Auto-Activation**: Seamlessly activates environments when entering project directories
-- 🛠️ **Auto-Creation**: Creates new virtual environments when none exist
-- 🐚 **Multi-Shell Support**: Works with Bash, Zsh, Fish, and PowerShell
-- ⚙️ **Highly Configurable**: Extensive customization through JSON configuration files
-- 🔧 **Smart Project Recognition**: Detects projects by common indicators (`.git`, `requirements.txt`, etc.)
-- 🎯 **Python Version Management**: Integrates with pyenv and `.python-version` files
-- 🔗 **Custom Hooks**: Pre/post activation and creation hooks for extensibility
-- 📦 **Package Management**: Optional automatic requirements installation
-- 🎯 **Cross-Platform**: Works on Windows, macOS, and Linux
-- 📊 **Logging & Debugging**: Built-in logging system for troubleshooting
-- ⚡ **Performance**: Caching system for faster environment detection
+It automatically detects your project framework, creates isolated environments, parses your AST for dependencies, catches runtime errors in real-time, injects missing environment variables, and retries your code until it works. It even generates `Dockerfile`s and explains codebases to you.
 
-## 🏗️ Supported Environment Types
+---
 
-- **Standard Virtual Environments**: `venv`, `virtualenv`, `.venv`, `.env`
-- **Poetry**: Automatic detection and activation via `poetry shell`
-- **Pipenv**: Automatic detection and activation via `pipenv shell`
-- **Conda**: Support for Conda environments with `environment.yml`
-- **Custom Environments**: User-defined environment patterns
+## ✨ The Magic (Demo)
+
+Imagine running a script with missing imports and undefined environment variables:
+
+```bash
+$ autoviron run main.py
+```
+
+AutoViron's output:
+```text
+🔍 Detected project type: FastAPI
+Found venv environment at /path/to/.venv
+Executing: python main.py
+⚠️ Smart Retry: Missing module 'bs4' detected.
+🧠 Recalled past fix: Auto-installed beautifulsoup4
+📦 Auto-installing 'beautifulsoup4'...
+✅ Successfully installed 'beautifulsoup4'.
+🔄 Retrying execution... (Attempt 1/3)
+⚠️ Smart Retry: Missing environment variable 'SECRET_KEY' detected.
+💬 Please provide a value for SECRET_KEY: my_super_secret
+🔄 Retrying execution... (Attempt 2/3)
+✅ Execution Successful!
+```
+
+---
+
+## ⚡ Features
+
+* **Self-Healing Execution**: Wraps your Python execution. If it hits an `ImportError`, it automatically maps the module (e.g., `cv2` -> `opencv-python`), installs it, and retries. If it hits a `KeyError`, it prompts you for the missing Env Var, injects it, and retries.
+* **Failure Memory**: AutoViron learns from its mistakes. It stores past resolutions in a local `.autoviron_failures.json` database so it never has to ask you the same question twice.
+* **Project Explainer**: Clone a massive repo and don't know where to start? Run `autoviron explain` for a plain-English breakdown of the architecture, framework, and entry points.
+* **Learning Mode**: Don't know what `uvicorn` does? Run `autoviron learn uvicorn` for an offline dictionary definition.
+* **Plugin System**: Built-in support for FastAPI, Django, and Data Science/ML repos.
+* **Cloud Sandbox Generator**: Run `autoviron sandbox` to instantly generate a highly optimized `Dockerfile` tailored to your specific framework.
+* **Team Sync**: Run `autoviron export` to dump your config to `autoviron.toml` so your whole team shares the exact same setup.
+
+---
 
 ## 📦 Installation
 
-### From Source
-
 ```bash
+# Clone the repository
 git clone https://github.com/Atharva1399/autoviron.git
 cd autoviron
+
+# Install globally
 pip install -e .
 ```
 
-### From PyPI (when available)
+---
 
+## 🚀 Usage
+
+### 1. The Smart Runner
+Just prepend `autoviron run` to any command. It will auto-activate (or create) the `.venv`, install `requirements.txt` (utilizing a super-fast caching engine), and self-heal any runtime errors.
 ```bash
-pip install autoviron
+autoviron run python script.py
 ```
 
-## 🚀 Quick Start
-
-### 1. Basic Usage
-
+### 2. The Project Explainer
+Understand any codebase in seconds.
 ```bash
-# Navigate to a Python project
-cd /path/to/your/project
-
-# AutoViron will automatically detect and activate the environment
-autoviron
-
-# Or run a command directly in the environment
-autoviron python --version
-autoviron pip install requests
+autoviron explain
 ```
 
-### 2. Shell Integration
-
-#### Bash/Zsh
-Add to your `~/.bashrc` or `~/.zshrc`:
-
+### 3. The Sandbox Generator
+Generate an optimized Dockerfile for isolated execution.
 ```bash
-source /path/to/autoviron/shell/bash.sh
-# or for zsh
-source /path/to/autoviron/shell/zsh.sh
+autoviron sandbox
 ```
 
-#### Fish
-Add to your `~/.config/fish/config.fish`:
-
-```fish
-source /path/to/autoviron/shell/fish.fish
-```
-
-#### PowerShell
-Add to your PowerShell profile:
-
-```powershell
-. /path/to/autoviron/shell/powershell.ps1
-```
-
-### 3. Available Commands
-
-Once integrated, you'll have access to these commands:
-
-- `autoviron_activate` / `autoviron-activate`: Activate environment in current directory
-- `autoviron_create` / `autoviron-create`: Create and activate new environment
-- `autoviron_deactivate` / `autoviron-deactivate`: Deactivate current environment
-- `autoviron_status` / `autoviron-status`: Show current environment status
-- `autoviron_run` / `autoviron-run`: Run commands in detected environment
-
-## ⚙️ Configuration
-
-AutoViron supports multiple configuration locations with precedence:
-
-1. `./autovironrc` (project-specific)
-2. `./autoviron.json` (project-specific)
-3. `~/.autovironrc` (user-specific)
-4. `~/.config/autoviron/config.json` (user-specific)
-5. `config/default_config.json` (default)
-
-### Example Configuration
-
-```json
-{
-    "venv_patterns": [
-        "venv",
-        "env",
-        ".venv",
-        ".env",
-        "virtualenv"
-    ],
-    "python_versions": [
-        "python3",
-        "python",
-        "python3.11",
-        "python3.10"
-    ],
-    "project_indicators": [
-        ".git",
-        "pyproject.toml",
-        "requirements.txt",
-        "setup.py"
-    ],
-    "auto_create": true,
-    "auto_activate": true,
-    "shell_integration": true,
-    "verbose": false,
-    "hooks": {
-        "pre_activate": "echo 'Setting up environment...'",
-        "post_activate": "echo 'Environment ready!'",
-        "pre_create": "echo 'Creating environment...'",
-        "post_create": "echo 'Environment created!'"
-    },
-    "logging": {
-        "enabled": false,
-        "level": "INFO",
-        "file": "~/.autoviron.log"
-    }
-}
-```
-
-## 🔧 Advanced Features
-
-### Custom Hooks
-
-AutoViron supports custom hooks that run before and after environment operations:
-
-```json
-{
-    "hooks": {
-        "pre_activate": "echo 'Pre-activation hook'",
-        "post_activate": "pip install -r requirements.txt",
-        "pre_create": "echo 'Pre-create hook'",
-        "post_create": "echo 'Post-create hook'"
-    }
-}
-```
-
-### Python Version Management
-
-AutoViron integrates with pyenv and `.python-version` files:
-
+### 4. Fix Broken Environments
+If your OS updated Python and broke your symlinks, just nuke and pave the environment safely:
 ```bash
-# Create a .python-version file in your project
-echo "3.11.0" > .python-version
-
-# AutoViron will use this version when creating environments
-autoviron_create
+autoviron fix
 ```
 
-### Environment Type Detection
+---
 
-AutoViron automatically detects different environment types:
+## 🏗️ Architecture
 
-```bash
-# Poetry project
-cd poetry-project  # Contains pyproject.toml and poetry.lock
-autoviron_activate  # Activates via 'poetry shell'
+* **`core/execution.py`**: The self-healing loop that intercepts `stderr` stack traces.
+* **`core/deps.py`**: The AST parser and Smart Dependency Engine mapping dictionaries.
+* **`core/failure_db.py`**: The JSON-backed memory storage for retaining error resolutions.
+* **`plugins/`**: The extensible project-handler logic for framework-specific behaviors.
 
-# Pipenv project  
-cd pipenv-project  # Contains Pipfile
-autoviron_activate  # Activates via 'pipenv shell'
+## 🥊 Comparison
 
-# Conda project
-cd conda-project   # Contains environment.yml
-autoviron_activate  # Activates via 'conda activate'
+| Feature | AutoViron | direnv | pipenv |
+| :--- | :---: | :---: | :---: |
+| Auto-activation on `cd` | ✅ (via `hook`) | ✅ | ❌ |
+| Intercepts `ImportError` & auto-installs | ✅ | ❌ | ❌ |
+| Intercepts `KeyError` & prompts | ✅ | ❌ | ❌ |
+| AI Project Explanation | ✅ | ❌ | ❌ |
+| Generates Dockerfiles | ✅ | ❌ | ❌ |
 
-# Standard venv
-cd venv-project    # Contains venv/ directory
-autoviron_activate  # Activates via 'source venv/bin/activate'
-```
-
-## 🎯 Command Line Options
-
-```bash
-autoviron [OPTIONS] [COMMAND]
-
-Options:
-  -c, --config PATH        Path to configuration file
-  -v, --verbose           Enable verbose output
-  -q, --quiet             Suppress output
-  --no-auto-create        Disable automatic environment creation
-  --no-auto-activate      Disable automatic environment activation
-  -f, --force             Force operations even if environment exists
-  --help                  Show help message
-
-Examples:
-  autoviron                    # Auto-detect and activate environment
-  autoviron --verbose          # Enable verbose output
-  autoviron python --version   # Run command in environment
-  autoviron --no-auto-create   # Don't create environment if none exists
-  autoviron --config myconfig.json  # Use custom config file
-```
-
-## 🏗️ Project Structure
-
-```
-autoviron/
-├── autoviron/                 # Main package directory
-│   ├── __init__.py           # Main AutoViron module
-│   ├── shell/                # Shell integration scripts
-│   │   ├── bash.sh          # Bash integration
-│   │   ├── zsh.sh           # Zsh integration
-│   │   ├── fish.fish        # Fish integration
-│   │   └── powershell.ps1   # PowerShell integration
-│   └── config/               # Configuration files
-│       └── default_config.json  # Default configuration
-├── tests/                     # Test suite
-│   ├── __init__.py          # Tests package
-│   └── test_autoviron.py    # Main test suite
-├── pyproject.toml            # Modern Python packaging config
-├── setup.py                  # Backward compatibility setup
-├── MANIFEST.in               # Package distribution includes
-├── build.py                  # Build script
-├── requirements.txt          # Dependencies
-├── .autovironrc.example     # Example configuration
-├── LICENSE                   # MIT License
-├── README.md                # This file
-├── CONTRIBUTING.md          # Contribution guidelines
-├── CODE_OF_CONDUCT.md       # Community standards
-└── .gitignore               # Git ignores
-```
-
-## 📋 Examples
-
-### Poetry Project Workflow
-
-```bash
-# Start a new Poetry project
-mkdir my-poetry-project
-cd my-poetry-project
-
-# Initialize Poetry
-poetry init
-
-# AutoViron will detect Poetry and activate the environment
-autoviron_activate
-
-# Install dependencies
-poetry add requests flask
-
-# Your Poetry environment is now active!
-python -c "import requests; print('Success!')"
-```
-
-### Multi-Environment Project
-
-```bash
-# Project with multiple environment types
-cd mixed-project
-
-# AutoViron detects the appropriate environment type
-autoviron_status
-# Output: Active Poetry environment
-
-# Switch to a different environment
-cd ../conda-project
-autoviron_activate
-# Output: conda activate myenv
-```
-
-### Custom Hooks
-
-```bash
-# Create a project with custom hooks
-mkdir hook-project
-cd hook-project
-
-# Create .autovironrc with hooks
-cat > .autovironrc << EOF
-{
-    "hooks": {
-        "pre_activate": "echo 'Setting up development environment...'",
-        "post_activate": "pip install -r requirements.txt && echo 'Ready!'"
-    }
-}
-EOF
-
-# Activate environment with hooks
-autoviron_activate
-# Output: 
-# Setting up development environment...
-# source venv/bin/activate
-# Ready!
-```
-
-## 🧪 Testing
-
-Run the test suite to verify your installation:
-
-```bash
-python test_autoviron.py
-```
-
-This will test:
-- Import functionality
-- Configuration loading
-- Environment detection
-- Shell integration
-- Configuration files
-
-## 🔍 Troubleshooting
-
-### Environment Not Found
-
-1. Check if the environment exists in the expected location
-2. Verify the `venv_patterns` in your configuration
-3. Use `--verbose` flag for debugging information
-4. Check the log file if logging is enabled
-
-### Shell Integration Not Working
-
-1. Ensure the shell script is properly sourced
-2. Check file permissions on the shell scripts
-3. Verify the path to `autoviron.py` is correct
-4. Test with `autoviron_status` command
-
-### Permission Issues
-
-1. Make sure shell scripts are executable: `chmod +x shell/*.sh`
-2. Check Python script permissions: `chmod +x autoviron.py`
-
-### Debugging
-
-Enable verbose output and logging:
-
-```bash
-# Enable verbose output
-autoviron --verbose
-
-# Enable logging in config
-{
-    "logging": {
-        "enabled": true,
-        "level": "DEBUG",
-        "file": "~/.autoviron.log"
-    }
-}
-```
+---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-### Development Setup
-
-```bash
-git clone https://github.com/Atharva1399/autoviron.git
-cd autoviron
-pip install -e ".[dev]"
-pre-commit install
-```
-
-### Running Tests
-
-```bash
-pytest
-pytest --cov=autoviron
-python test_autoviron.py
-```
+We welcome contributions! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to submit pull requests, run tests, and adhere to our coding standards.
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Inspired by tools like `auto-venv`, `autovenv`, and `AutoActivator`
-- Built with modern Python best practices
-- Designed for developer productivity and workflow automation
-- Community-driven development and feedback
-
-## 📞 Support
-
-- 📖 [Documentation](https://github.com/Atharva1399/autoviron#readme)
-- 🐛 [Bug Reports](https://github.com/Atharva1399/autoviron/issues)
-- 💡 [Feature Requests](https://github.com/Atharva1399/autoviron/issues)
-- 💬 [Discussions](https://github.com/Atharva1399/autoviron/discussions)
-
----
-
-**AutoViron** - Making Python environment management effortless! 🐍✨ 
